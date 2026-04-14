@@ -1,30 +1,28 @@
-// When the DOM is ready, set up the page.
-$(function() {
+// Makes sure that your function is called once all the DOM elements of the page are ready to be used.
+$(function () {
   // Called function to update the name, happiness, weight, and energy of our pet in our HTML
   checkAndUpdatePetInfoInHtml();
 
   // When each button is clicked, it will "call" function for that button (functions are below)
-  $('.treat-button').click(clickedTreatButton);
-  $('.play-button').click(clickedPlayButton);
-  $('.exercise-button').click(clickedExerciseButton);
+  $(".treat-button").click(clickedTreatButton);
+  $(".play-button").click(clickedPlayButton);
+  $(".exercise-button").click(clickedExerciseButton);
 
   // 4. Add a new action button 
-  $('.nap-button').click(clickedNapButton);
+  $(".nap-button").click(clickedNapButton);
 
-  // Hide the comment area at first so our jQuery .fadeIn() visual notification is noticeable.
-  $('.pet-comment').hide();
+  // Start comment area hidden so our .fadeIn() effect is visible.
+  $(".pet-comment").hide();
 });
-
 
 // 1. Create a pet_info object with keys "name", "weight", "happiness" and set initial values. Set this equal to variable "pet_info" 
 var pet_info = {
   name: "Pixel",
   weight: 5,
   happiness: 5,
-  // Extra property to support the new behavior for requirement 5
-  energy: 5
+  // Extra property used by the new behavior for requirement 5
+  energy: 5,
 };
-
 
 function clickedTreatButton() {
   // 2. Add a behavior to button interaction. When your pet receives a treat, add to its happiness and weight.
@@ -59,7 +57,7 @@ function clickedExerciseButton() {
 
 function clickedNapButton() {
   // 5. Add a new behavior that correlates with the new button you added. You can add it below the happiness text in the html 
-  // When the pet takes a nap, we increase its energy and happiness a little bit.
+  // When the pet takes a nap, increase its energy and happiness a little.
   pet_info.energy = pet_info.energy + 2;
   pet_info.happiness = pet_info.happiness + 1;
 
@@ -67,7 +65,6 @@ function clickedNapButton() {
 
   checkAndUpdatePetInfoInHtml();
 }
-
 
 function checkAndUpdatePetInfoInHtml() {
   // 3.  Fix key bugs to make sure certain key values can't go below zero. (can use conditional) 
@@ -86,32 +83,39 @@ function checkAndUpdatePetInfoInHtml() {
 
 // Updates your HTML with the current values in your pet_info object
 function updatePetInfoInHtml() {
-  $('.name').text(pet_info['name']);
-  $('.weight').text(pet_info['weight']);
-  $('.happiness').text(pet_info['happiness']);
-  $('.energy').text(pet_info['energy']);
-}
+  $(".name").text(pet_info["name"]);
+  $(".weight").text(pet_info["weight"]);
+  $(".happiness").text(pet_info["happiness"]);
+  $(".energy").text(pet_info["energy"]);
 
+  // Swap pet image based on happiness level (sad / happy / really happy)
+  if (pet_info.happiness <= 3) {
+    $(".pet-image").attr("src", "images/dog-sad.png");
+  } else if (pet_info.happiness <= 7) {
+    $(".pet-image").attr("src", "images/dog-happy.png");
+  } else {
+    $(".pet-image").attr("src", "images/dog-very-happy.png");
+  }
+}
 
 // 6. Add a visual notification after each button press with a comment from your pet. For this requirement you can not use console.log() or alert(). 
 function showPetComment(message) {
+  // First we set the text of the comment area using .text(),
+  // which was already used in the starter code to update other spans.
+  $(".pet-comment").text(message);
 
   // 7. Review jQuery documentation. Sign up for two unique methods (not discussed in class and in starter code) and use it in your project. 
   // 8. Provide comments fully explaining how the methods are used. 
 
-  // First we set the text of the comment area using .text(),
-  // which was already used in the starter code to update other spans.
-  $('.pet-comment').text(message);
-
   // New jQuery method #1: .fadeIn()
-  // .fadeIn(200) is a jQuery effect method from the official documentation.
-  // It gradually changes the .pet-comment element from hidden (display: none) to visible
-  // over 200 milliseconds so the pet's comment appears as a visual notification.
-  $('.pet-comment').fadeIn(200);
+  // .fadeIn(200) is an effect method from the jQuery documentation.
+  // It gradually changes .pet-comment from hidden to visible over 200ms,
+  // so the pet's comment appears as a smooth visual notification.
+  $(".pet-comment").fadeIn(200);
 
   // New jQuery method #2: .addClass()
-  // .addClass('highlight') is another jQuery method from the documentation.
-  // It adds the CSS class "highlight" to the .pet-comment element so the text is bold
-  // and colored, making the pet's message stand out after each button press.
-  $('.pet-comment').addClass('highlight');
+  // .addClass('highlight') adds the CSS class "highlight" to .pet-comment.
+  // This makes the text bold and colored (see style.css), helping the pet's
+  // message stand out after each button press.
+  $(".pet-comment").addClass("highlight");
 }

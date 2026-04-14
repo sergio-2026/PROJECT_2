@@ -1,30 +1,37 @@
+/* Global box-sizing so padding and borders are easier to control */
 * {
   box-sizing: border-box;
 }
 
+/* Warm off‑white background and softer text for vintage cartoon feel */
 body {
   font-family: helvetica, arial, sans-serif;
   margin: 25px;
+  background-color: #f7f1e3; /* light cream */
+  color: #222222;            /* soft dark grey */
 }
 
+/* Keep main block from starter; no lines here */
 main {
   display: block;
   height: 175px;
 }
 
+/* Header without border line, just a little spacing */
 header {
-  border-bottom: 1px solid black;
+  margin-bottom: 10px;
 }
 
 h1 {
   font-weight: bold;
-  color: #000;
+  color: #2b1f13; /* dark brown instead of pure black */
 }
 
 .bold {
   font-weight: bold;
 }
 
+/* Limit line length for readability */
 p {
   max-width: 600px;
 }
@@ -33,9 +40,11 @@ li {
   margin-bottom: 5px;
 }
 
+/* Footer spacing only, no line */
 footer {
   padding-top: 25px;
-  border-top: 1px solid black;
+  font-size: 0.9em;
+  color: #444444;
 }
 
 footer a {
@@ -43,55 +52,36 @@ footer a {
   margin: 5px;
 }
 
+/* Pet image kept fixed height with subtle panel behind it */
 .pet-image {
   height: 250px;
+  background-color: #f2e7d5;
 }
 
 .dashboard div {
   display: block;
 }
 
+/* Small padding around the image area, like a photo border */
 .pet-image-container {
   float: left;
   padding: 10px;
 }
 
+/* Light card styling around stats */
 .dashboard {
   float: left;
   padding: 20px;
+  background-color: #fff9ee;
+  border: 1px solid #c0a98a;
+  border-radius: 4px;
 }
 
+/* Space above the button row */
 .button-container {
   margin-top: 20px;
 }
 
+/* Simple dark buttons with subtle highlight */
 .button-container button {
-  width: 100px;
-  margin-right: 10px;
-  text-align: center;
-  display: inline-block;
-  float: left;
-  font-size: 15px;
-  background-color: #1e2835;
-  border-color: #404853;
-  cursor: pointer;
-  background-image: linear-gradient(
-    to bottom,
-    rgba(246, 246, 246, .1) 0%,
-    rgba(30, 40, 53, 0) 66%
-  );
-  color: #fafafa;
-}
-
-/* Simple styling for the pet comment area (requirement 6 visual notification) */
-.pet-comment {
-  margin-top: 15px;
-  min-height: 1.5em;
-  display: none;      /* starts hidden so jQuery .fadeIn() is visible */
-}
-
-/* Highlight class used with jQuery .addClass() to make comment stand out */
-.highlight {
-  font-weight: bold;
-  color: #0066cc;
-}
+  w
