@@ -51,7 +51,7 @@ function clickedTreatButton() {
   //if i overfeed the pes, it gains too much weight and has less energt
   if (pet_info.weight > 15) 
     { pet_info.energy = pet_info.energy - 2; }  
-  showPetComment("Yum! Thanks for the treat!");
+  showPetComment("Deliciosooo!");
   checkAndUpdatePetInfoInHtml();
 }
 
@@ -60,7 +60,7 @@ function clickedPlayButton() {
   pet_info.happiness = pet_info.happiness + 2;
   pet_info.weight = pet_info.weight - 1;
   pet_info.energy = pet_info.energy - 1;
-  showPetComment("That was fun! Let's play again!");
+  showPetComment("I play in the stock market for fun!");
   checkAndUpdatePetInfoInHtml();
 }
 
@@ -70,7 +70,7 @@ function clickedExerciseButton() {
   pet_info.weight = pet_info.weight - 2;
   pet_info.energy = pet_info.energy - 2;
 
-  showPetComment("Phew... exercise is hard work!");
+  showPetComment("I don't like exercising... but I hate guilt more :(");
   checkAndUpdatePetInfoInHtml();
 }
 
@@ -80,7 +80,7 @@ function clickedNapButton() {
   pet_info.energy = pet_info.energy + 3;
   pet_info.happiness = pet_info.happiness + 1;
 
-  showPetComment("Zzz... that nap felt great!");
+  showPetComment("Napping is my only hobby : |");
   checkAndUpdatePetInfoInHtml();
 }
 
