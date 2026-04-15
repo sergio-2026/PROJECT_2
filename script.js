@@ -8,7 +8,6 @@ $(function () {
   $(".play-button").click(clickedPlayButton);
   $(".exercise-button").click(clickedExerciseButton);
   $(".nap-button").click(clickedNapButton);
-
   // Hide the comment at first so the visual effect is easier to see.
   $(".pet-comment").hide();
 });
@@ -24,8 +23,6 @@ var pet_info = {
 
 // 2 Add a behavior to button interaction. 
 // When your pet receives a treat, add to its happiness and weight. 
-// When your pet exercises, reduce its happiness and weight. 
-// When your pet plays, add to its happiness and reduce its weight
 function clickedTreatButton() {
   pet_info.happiness = pet_info.happiness + 2;
   pet_info.weight = pet_info.weight + 1;
@@ -40,6 +37,7 @@ function clickedTreatButton() {
   checkAndUpdatePetInfoInHtml();
 }
 
+// When your pet plays, add to its happiness and reduce its weight
 function clickedPlayButton() {
   pet_info.happiness = pet_info.happiness + 2;
   pet_info.weight = pet_info.weight - 1;
@@ -48,6 +46,7 @@ function clickedPlayButton() {
   checkAndUpdatePetInfoInHtml();
 }
 
+// When your pet exercises, reduce its happiness and weight. 
 function clickedExerciseButton() {
   pet_info.happiness = pet_info.happiness - 1;
   pet_info.weight = pet_info.weight - 2;
@@ -57,8 +56,7 @@ function clickedExerciseButton() {
   checkAndUpdatePetInfoInHtml();
 }
 
-// 5 Add a new behavior that correlates with the new button you added. You can add it below
-//the happiness button
+// 5 Add a new behavior that correlates with the new button you added. 
 function clickedNapButton() {
   // A nap gives the pet more energy and a little more happiness.
   pet_info.energy = pet_info.energy + 3;
@@ -73,8 +71,8 @@ function checkAndUpdatePetInfoInHtml() {
   if (pet_info.weight < 3) {
     pet_info.weight = 3;
   }
-  if (pet_info.happiness < 0) {
-    pet_info.happiness = 0;
+  if (pet_info.happiness < 5) {
+    pet_info.happiness = 5;
   }
   if (pet_info.energy < 0) {
     pet_info.energy = 0;
@@ -90,8 +88,9 @@ function updatePetInfoInHtml() {
   $(".happiness").text(pet_info.happiness);
   $(".energy").text(pet_info.energy);
 
-  // Simple happy / normal / tired image swap based on happiness.
+  // Complex happy / normal / tired image swap based on happiness.
   if (pet_info.happiness < 5 || pet_info.energy <= 0 || pet_info.weight <= 3) {
+    animatePet();
     $(".pet-image").attr("src", "images/dog-dead.png");
   } else if (pet_info.happiness <= 9) {
     $(".pet-image").attr("src", "images/dog-sad.png");
@@ -107,25 +106,16 @@ function updatePetInfoInHtml() {
 function showPetComment(message) {
   // Put the new message into the comment paragraph.
   $(".pet-comment").text(message);
+  $(".pet-comment").show();
+}
 
   // 7 Review jQuery documentation. Sign up for two unique methods (not discussed in class and in starter code) and use it in your project. Provide comments fully explaining how themethods are used.
 
-  // New jQuery method #1: .fadeIn()
-  // .fadeIn(200) slowly shows the .pet-comment over 0.2 seconds, so
-  // the message appears as a smooth visual effect instead of popping in.
-  $(".pet-comment").fadeIn(200);
 
-  // New jQuery method #2: .addClass()
-  // .addClass("highlight") adds a CSS class that makes the text bold and blue.
-  // This helps the pet's comment stand out under the stats.
-  $(".pet-comment").addClass("highlight");
-}
 
 // 9 Add animations and/or sound effects to your pet when certain conditions occur.
-function animatePetIfNeeded() {
-  // If the pet is very happy or has no energy, we give a quick blink animation.
-  if (pet_info.happiness >= 10 || pet_info.energy === 0) {
-    // fadeOut then fadeIn makes the image blink one time.
-    $(".pet-image").fadeOut(150).fadeIn(150);
-  }
+function animatePet() {
+  // If pet passes away, make it give a whimper sound
+    var whimper = new Audio("sounds/whimper.mp3");
+    whimper.play();
 }
