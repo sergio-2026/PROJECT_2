@@ -1,56 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Giga Pet</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Giga Pet</h1>
+      <p>
+        Use the buttons to take care of your pet. Watch the happiness, weight,
+        and energy change as you interact.
+      </p>
+    </header>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>Project Gigapet JavaScript</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+    <main>
+      <div class="pet-wrapper">
+        <div class="pet-image-container">
+          <!-- 8 Make sure to change the provided image to a new image of your choosing. -->
+          <img
+            src="images/dog-happy.png"
+            alt="Cartoon dog named Mr Bean"
+            class="pet-image"
+          />
+        </div>
 
-<body>
-  <header>
-    <h1>Giga Pet</h1>
-    <p>
-      Use the buttons to take care of your pet. Watch the happiness, weight,
-      and energy change as you interact.
-    </p>
-  </header>
+        <div class="dashboard">
+          <p><span class="bold">Name:</span> <span class="name"></span></p>
+          <p><span class="bold">Weight:</span> <span class="weight"></span></p>
+          <p>
+            <span class="bold">Happiness:</span>
+            <span class="happiness"></span>
+          </p>
+          <p><span class="bold">Energy:</span> <span class="energy"></span></p>
 
-  <main>
-    <div class="pet-image-container">
-      <!-- 9. Make sure to change the provided image to a new image of your choosing. -->
-      <img class="pet-image" src="images/dog-happy.png" alt="My Giga Pet dog in a happy state" />
-    </div>
+          <div class="button-container">
+            <button class="treat-button">Treat</button>
+            <button class="play-button">Play</button>
+            <button class="exercise-button">Exercise</button>
+            <!-- 4 Add a new action button -->
+            <button class="nap-button">Nap</button>
+          </div>
 
-    <div class="dashboard">
-      <div>Name: <span class="name"></span></div>
-      <div>Weight: <span class="weight"></span></div>
-      <div>Happiness: <span class="happiness"></span></div>
-
-      <!-- 5. Add a new behavior that correlates with the new button you added. You can add it below the happiness text in the html  -->
-      <div>Energy: <span class="energy"></span></div>
-
-      <!-- 6. Add a visual notification after each button press with a comment from your pet. For this requirement you can not use console.log() or alert().  -->
-      <p class="pet-comment"></p>
-
-      <div class="button-container">
-        <button class="treat-button">Treat</button>
-        <button class="play-button">Play</button>
-        <button class="exercise-button">Exercise</button>
-
-        <!-- 4. Add a new action button  -->
-        <button class="nap-button">Nap</button>
+          <!-- 6 Add a visual notification after each button press with a comment from your pet. -->
+          <p class="pet-comment"></p>
+        </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <footer>
-    <p>Project Gigapet JavaScript &mdash; COMP 484</p>
-  </footer>
+    <footer>Project Gigapet JavaScript — COMP 484</footer>
 
-  <!-- jQuery library -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="script.js"></script>
-</body>
-
+    <!-- jQuery must load before script.js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

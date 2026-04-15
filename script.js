@@ -1,75 +1,77 @@
-// Makes sure that your function is called once all the DOM elements of the page are ready to be used.
+// Wait for the page HTML to be ready.
 $(function () {
-  // Called function to update the name, happiness, weight, and energy of our pet in our HTML
+  // Show the starting stats when the page first loads.
   checkAndUpdatePetInfoInHtml();
 
-  // When each button is clicked, it will "call" function for that button (functions are below)
+  // Hook up each button to its function.
   $(".treat-button").click(clickedTreatButton);
   $(".play-button").click(clickedPlayButton);
   $(".exercise-button").click(clickedExerciseButton);
-
-  // 4. Add a new action button 
   $(".nap-button").click(clickedNapButton);
 
-  // Start comment area hidden so our .fadeIn() effect is visible.
+  // Hide the comment at first so the visual effect is easier to see.
   $(".pet-comment").hide();
 });
 
-// 1. Create a pet_info object with keys "name", "weight", "happiness" and set initial values. Set this equal to variable "pet_info" 
+// 1 Create a pet_info object with keys "name", "weight", "happiness" and set initial values.
+//   Set this equal to variable "pet_info"
 var pet_info = {
-  name: "Pixel",
-  weight: 5,
-  happiness: 5,
-  // Extra property used by the new behavior for requirement 5
-  energy: 5,
+  name: "Mr Bean",
+  weight: 10,
+  happiness: 10,
+  energy: 10
 };
 
+// 2 Add a behavior to button interaction. 
+// When your pet receives a treat, add to its happiness and weight. 
+// When your pet exercises, reduce its happiness and weight. 
+// When your pet plays, add to its happiness and reduce its weight
 function clickedTreatButton() {
-  // 2. Add a behavior to button interaction. When your pet receives a treat, add to its happiness and weight.
   pet_info.happiness = pet_info.happiness + 2;
   pet_info.weight = pet_info.weight + 1;
-
-  // 6. Add a visual notification after each button press with a comment from your pet. For this requirement you can not use console.log() or alert(). 
+  pet_info.energy = pet_info.energy + 1;
+  //if i overfeed the pes, it gains too much weight and becomes less happy
+  if (pet_info.weight > 15) 
+    { pet_info.happiness = pet_info.happiness - 3; }  
+  //if i overfeed the pes, it gains too much weight and has less energt
+  if (pet_info.weight > 15) 
+    { pet_info.energy = pet_info.energy - 2; }  
   showPetComment("Yum! Thanks for the treat!");
-
   checkAndUpdatePetInfoInHtml();
 }
 
 function clickedPlayButton() {
-  // 2. Add a behavior to button interaction. When your pet plays, add to its happiness and reduce its weight 
   pet_info.happiness = pet_info.happiness + 2;
   pet_info.weight = pet_info.weight - 1;
-
+  pet_info.energy = pet_info.energy - 1;
   showPetComment("That was fun! Let's play again!");
-
   checkAndUpdatePetInfoInHtml();
 }
 
 function clickedExerciseButton() {
-  // 2. Add a behavior to button interaction. When your pet exercises, reduce its happiness and weight. 
   pet_info.happiness = pet_info.happiness - 1;
   pet_info.weight = pet_info.weight - 2;
+  pet_info.energy = pet_info.energy - 2;
 
   showPetComment("Phew... exercise is hard work!");
-
   checkAndUpdatePetInfoInHtml();
 }
 
+// 5 Add a new behavior that correlates with the new button you added. You can add it below
+//the happiness button
 function clickedNapButton() {
-  // 5. Add a new behavior that correlates with the new button you added. You can add it below the happiness text in the html 
-  // When the pet takes a nap, increase its energy and happiness a little.
-  pet_info.energy = pet_info.energy + 2;
+  // A nap gives the pet more energy and a little more happiness.
+  pet_info.energy = pet_info.energy + 3;
   pet_info.happiness = pet_info.happiness + 1;
 
   showPetComment("Zzz... that nap felt great!");
-
   checkAndUpdatePetInfoInHtml();
 }
 
+// 3 Fix key bugs to make sure certain key values can't go below zero. (can use conditional)
 function checkAndUpdatePetInfoInHtml() {
-  // 3.  Fix key bugs to make sure certain key values can't go below zero. (can use conditional) 
-  if (pet_info.weight < 0) {
-    pet_info.weight = 0;
+  if (pet_info.weight < 3) {
+    pet_info.weight = 3;
   }
   if (pet_info.happiness < 0) {
     pet_info.happiness = 0;
@@ -81,41 +83,49 @@ function checkAndUpdatePetInfoInHtml() {
   updatePetInfoInHtml();
 }
 
-// Updates your HTML with the current values in your pet_info object
+// Updates the HTML with the current values in the pet_info object.
 function updatePetInfoInHtml() {
-  $(".name").text(pet_info["name"]);
-  $(".weight").text(pet_info["weight"]);
-  $(".happiness").text(pet_info["happiness"]);
-  $(".energy").text(pet_info["energy"]);
+  $(".name").text(pet_info.name);
+  $(".weight").text(pet_info.weight);
+  $(".happiness").text(pet_info.happiness);
+  $(".energy").text(pet_info.energy);
 
-  // Swap pet image based on happiness level (sad / happy / really happy)
-  if (pet_info.happiness <= 3) {
+  // Simple happy / normal / tired image swap based on happiness.
+  if (pet_info.happiness < 5 || pet_info.energy <= 0 || pet_info.weight <= 3) {
+    $(".pet-image").attr("src", "images/dog-dead.png");
+  } else if (pet_info.happiness <= 9) {
     $(".pet-image").attr("src", "images/dog-sad.png");
-  } else if (pet_info.happiness <= 7) {
-    $(".pet-image").attr("src", "images/dog-happy.png");
-  } else {
+  } else if (pet_info.happiness >= 15) {
     $(".pet-image").attr("src", "images/dog-very-happy.png");
+  } else {
+    $(".pet-image").attr("src", "images/dog-happy.png");
   }
+
 }
 
-// 6. Add a visual notification after each button press with a comment from your pet. For this requirement you can not use console.log() or alert(). 
+// 6 Add a visual notification after each button press with a comment from your pet. For this requirement you can not use console.log() or alert().
 function showPetComment(message) {
-  // First we set the text of the comment area using .text(),
-  // which was already used in the starter code to update other spans.
+  // Put the new message into the comment paragraph.
   $(".pet-comment").text(message);
 
-  // 7. Review jQuery documentation. Sign up for two unique methods (not discussed in class and in starter code) and use it in your project. 
-  // 8. Provide comments fully explaining how the methods are used. 
+  // 7 Review jQuery documentation. Sign up for two unique methods (not discussed in class and in starter code) and use it in your project. Provide comments fully explaining how themethods are used.
 
   // New jQuery method #1: .fadeIn()
-  // .fadeIn(200) is an effect method from the jQuery documentation.
-  // It gradually changes .pet-comment from hidden to visible over 200ms,
-  // so the pet's comment appears as a smooth visual notification.
+  // .fadeIn(200) slowly shows the .pet-comment over 0.2 seconds, so
+  // the message appears as a smooth visual effect instead of popping in.
   $(".pet-comment").fadeIn(200);
 
   // New jQuery method #2: .addClass()
-  // .addClass('highlight') adds the CSS class "highlight" to .pet-comment.
-  // This makes the text bold and colored (see style.css), helping the pet's
-  // message stand out after each button press.
+  // .addClass("highlight") adds a CSS class that makes the text bold and blue.
+  // This helps the pet's comment stand out under the stats.
   $(".pet-comment").addClass("highlight");
+}
+
+// 9 Add animations and/or sound effects to your pet when certain conditions occur.
+function animatePetIfNeeded() {
+  // If the pet is very happy or has no energy, we give a quick blink animation.
+  if (pet_info.happiness >= 10 || pet_info.energy === 0) {
+    // fadeOut then fadeIn makes the image blink one time.
+    $(".pet-image").fadeOut(150).fadeIn(150);
+  }
 }
