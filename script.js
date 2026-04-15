@@ -60,7 +60,7 @@ function clickedPlayButton() {
   pet_info.happiness = pet_info.happiness + 2;
   pet_info.weight = pet_info.weight - 1;
   pet_info.energy = pet_info.energy - 1;
-  showPetComment("I play in the stock market for fun!");
+  showPetComment("I watch the news for fun!");
   checkAndUpdatePetInfoInHtml();
 }
 
