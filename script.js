@@ -10,6 +10,24 @@ $(function () {
   $(".nap-button").click(clickedNapButton);
   // Hide the comment at first so the visual effect is easier to see.
   $(".pet-comment").hide();
+  
+  // 7 Review jQuery documentation. Sign up for two unique methods (not discussed in class and in starter code) and use it in your project. Provide comments fully explaining how themethods are used. 
+  
+  // The .dblclick() method is used to attach an action to the pet image
+  $(".pet-image").dblclick(function() {
+  pet_info.happiness = pet_info.happiness + 1; //increases the pet's happiness by 1
+  showPetComment("*wags tail* Thanks for the pets!"); //shows a comment thanking for the pets
+  checkAndUpdatePetInfoInHtml(); //updates the pet information in the HTML
+  });
+
+  //mouseenter and mouseleave are used to show and hide a comment when the mouse enters and leaves the pet image, respectively
+  $(".pet-image").mouseenter(function() {
+  showPetComment("Hint: Double-click me!"); //shows a comment when the mouse enters the pet image
+  });
+
+  $(".pet-image").mouseleave(function() {
+  $(".pet-comment").hide(); //hides the comment when the mouse leaves the pet image
+  });
 });
 
 // 1 Create a pet_info object with keys "name", "weight", "happiness" and set initial values.
@@ -106,12 +124,8 @@ function updatePetInfoInHtml() {
 function showPetComment(message) {
   // Put the new message into the comment paragraph.
   $(".pet-comment").text(message);
-  $(".pet-comment").show();
+  $(".pet-comment").show(); 
 }
-
-  // 7 Review jQuery documentation. Sign up for two unique methods (not discussed in class and in starter code) and use it in your project. Provide comments fully explaining how themethods are used.
-
-
 
 // 9 Add animations and/or sound effects to your pet when certain conditions occur.
 function animatePet() {
